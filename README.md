@@ -17,6 +17,8 @@
 
 <hr>
 
+### 유튜브 [@alohaclass](https://www.youtube.com/@alohaclass8075)
 
-## 1:1 레슨 [숨고 프로그래밍 레슨](https://soomgo.com/profile/users/717340)
-## 현장강의 [휴먼교육센터](http://www.human.or.kr/) [02-3667-3688](tel:02-3667-3688)
+### 1:1 레슨 [숨고 프로그래밍 레슨](https://soomgo.com/profile/users/717340)
+
+### 현장강의 [휴먼교육센터](http://www.human.or.kr/) 02-3667-3688
