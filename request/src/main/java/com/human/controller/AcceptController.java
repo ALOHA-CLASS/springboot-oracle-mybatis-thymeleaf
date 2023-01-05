@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  *  - produces	: 지정할 Accept 헤더 값 작성 
  * @author h
  *
- */
+ */ 
 @Slf4j
 @Controller
 @RequestMapping("/accept")
