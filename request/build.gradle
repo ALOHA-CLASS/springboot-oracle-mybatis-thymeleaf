@@ -27,6 +27,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// xml 데이터를 처리하기 위한 라이브러리
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+	
 }
 
 tasks.named('test') {

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX 로 요청하기</title>
+	
+</head>
+<body>
+	
+	<button onclick="requestJSON()">JSON 요청</button>
+	<button onclick="requestXML()">XML 요청</button>
+
+	<div id="frame"></div>
+
+	<script>
+		// AJAX 로 요청
+		function requestJSON() {
+			// XMLHttpRequest 객체 생성
+			let request = new XMLHttpRequest()
+
+			// 응답 확인
+			request.onreadystatechange = function() {
+				// request.readyState	: 클라이언트의 준비 상태 변수
+				//  - UNSENT			: open() 이 호출되기 전 상태
+				//  - OPENED			: open() 이 호출된 상태
+				//  - LOADING			: 응답 데이터를 가져오는 상태
+				//  - DONE				: 요청 완료
+
+				// request.status		: 요청에 대한 응답 상태 코드
+				//						   ex) 1XX, 2XX, 3XX, 4XX, 5XX
+				//						  200 OK  ()
+
+				// 요청 완료 시, 성공적으로 요청이 처리되었을 때
+				if( request.readyState == request.DONE && request.status == 200 ) {
+					// request.responseText : 응답 데이터
+					let response = request.responseText
+					document.getElementById("frame").innerHTML = response
+				}
+
+				// 에러 발생 시,
+				if( request.readyState == request.DONE && (request.status == 400 || request.status == 500 )  ) {
+					alert("에러 발생")
+				}
+			}
+
+			let data = {
+							"boardNo"   : 10,
+							"title"     : "제목",
+							"writer"     : "작성자",
+							"content"     : "내용",
+							"regDate"     : "2023-01-01",
+							"updDate"     : "2023-01-01"
+						}
+
+			// request.open("요청메소드", url, 비동기여부)
+			// - 요청에 필요한 설정을 초기화하는 메소드
+			request.open("POST", "/content/data", true)
+
+			// setRequestHeader("헤더속성", "값")
+			// - 요청헤더를 지정하는 메소드
+			request.setRequestHeader("Content-Type", "application/json")
+
+			// request.send(데이터) 
+			// -요청을 전송하는 메소드
+			// JSON.stringify( ) : Javascript 의 객체를 JSON 문자열로 변환하는 메소드
+			request.send( JSON.stringify( data ) )			
+		}
+
+
+		function requestXML() {
+			// XMLHttpRequest 객체 생성
+			let request = new XMLHttpRequest()
+
+			// 응답 확인
+			request.onreadystatechange = function() {
+				// 요청 성공 시,
+				if( request.readyState == request.DONE && request.status == 200 ) {
+					let response = request.responseText
+					document.getElementById("frame").innerHTML = response
+				}
+
+				// 에러 발생 시,
+				if( request.readyState == request.DONE && (request.status == 400 || request.status == 500 )  ) {
+					alert("에러 발생")
+				}
+			}
+
+			let data = "<Board>"
+    				 + "<boardNo>20</boardNo>"
+    				 + "<title>제목</title>"
+    				 + "<writer>작성자</writer>"
+    				 + "<content>내용</content>"
+    				 + "<regDate>2023-01-01</regDate>"
+    				 + "<updDate>2023-01-01</updDate>"
+					 + "</Board>" 
+
+			// request.open("요청메소드", url, 비동기여부)
+			// - 요청에 필요한 설정을 초기화하는 메소드
+			request.open("POST", "/content/data", true)
+
+			// setRequestHeader("헤더속성", "값")
+			// - 요청헤더를 지정하는 메소드
+			request.setRequestHeader("Content-Type", "application/xml")
+
+
+			// request.send(데이터) 
+			// -요청을 전송하는 메소드
+			request.send(data)			
+		}
+
+	
+	</script>
+</body>
+</html>

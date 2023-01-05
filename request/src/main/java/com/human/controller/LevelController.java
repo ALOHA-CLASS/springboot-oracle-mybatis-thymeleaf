@@ -35,13 +35,13 @@ import lombok.extern.slf4j.Slf4j;
  * --------------------------------------------------------
  * 
  * 경로 패턴 매핑
- * @XXXMapping("/~/{변수}")
- * @PathVariable("변수") 타입 매개변수명
- * : 요청 경로를 동적으로 표현가능하도록 지정
+ * @XXXMapping("/~/{요청변수}")				- 지정 URL 안에 사용할 경로변수를 { } 안에 작성
+ * @PathVariable("요청변수") 타입 매개변수명
+ * : 요청 경로 안의 요청변수의 값을 매개변수로 지정하는 어노테이션
  * - URL 에 변하는 값을 변수로 지정할 수 있다
  * 
  * * 요청경로에 지정한 변수와 매개변수명이 일치하면, 
- *    @PathVariable 어노테이션에 변수지정을 생략할 수 있다
+ *    @PathVariable 어노테이션의 요청변수를 생략할 수 있다
  *    ex) @XXXMapping("/board/read/{boardNo}")
  *        @Pathvariable int boardNo
  *        

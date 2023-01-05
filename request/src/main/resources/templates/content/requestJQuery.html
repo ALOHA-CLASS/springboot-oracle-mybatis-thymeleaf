@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 요청하기 (jQuery)</title>
+</head>
+<body>
+    <button onclick="requestJSON()">JSON 요청</button>
+	<button onclick="requestXML()">XML 요청</button>
+
+	<div id="frame"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+	<script>
+		// AJAX 로 요청
+		function requestJSON() {
+
+			let data = {
+							"boardNo"   : 10,
+							"title"     : "제목",
+							"writer"     : "작성자",
+							"content"     : "내용",
+							"regDate"     : "2023-01-01",
+							"updDate"     : "2023-01-01"
+						}
+            
+            // jQuery 로 AJAX 요청
+            $.ajax({
+                type        : 'POST',                    // 요청 메소드
+                url         : '/content/data',          // 요청 URL
+                data        : JSON.stringify(data),     // 요청 데이터
+                contentType : 'application/json; charset=utf-8',    // 요청 데이터 타입
+                dataType    : 'html',                               // 응답 데이터 타입
+                success     : function(response, status) {
+                    // response : 응답 데이터
+                    // status   : 응답 상태
+                    $('#frame').html(response)
+                },
+                error       : function(xhr, status) {
+                    // xhr      : XMLHttpRequest 객체
+                    // status   : 응답 상태
+                    alert('에러 발생')
+                }
+            })
+
+		}
+
+
+		function requestXML() {
+
+			let data = "<Board>"
+    				 + "<boardNo>20</boardNo>"
+    				 + "<title>제목</title>"
+    				 + "<writer>작성자</writer>"
+    				 + "<content>내용</content>"
+    				 + "<regDate>2023-01-01</regDate>"
+    				 + "<updDate>2023-01-01</updDate>"
+					 + "</Board>" 
+
+			// jQuery 로 AJAX 요청
+            $.ajax({
+                type        : 'POST',                   // 요청 메소드
+                url         : '/content/data',          // 요청 URL
+                data        : data,                     // 요청 데이터
+                contentType : 'application/xml; charset=utf-8',    // 요청 데이터 타입
+                dataType    : 'html',                               // 응답 데이터 타입
+                success     : function(response, status) {
+                    // response : 응답 데이터
+                    // status   : 응답 상태
+                    $('#frame').html(response)
+                },
+                error       : function(xhr, status) {
+                    // xhr      : XMLHttpRequest 객체
+                    // status   : 응답 상태
+                    alert('에러 발생')
+                }
+            })
+		}
+
+	
+	</script>
+</body>
+</html>
