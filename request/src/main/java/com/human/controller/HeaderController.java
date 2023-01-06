@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Controller
-@RequestMapping("/header")
+@RequestMapping("/header")   
 public class HeaderController {
 	
 	@GetMapping("/test")
