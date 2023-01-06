@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * String 타입 응답
- * - return 키워드에 응답할 뷰 파일(html)을 지정하여 응답
+ * - return 키워드 다음에 응답할 뷰 파일(html) 이름을 지정하여 응답
  * ex) return "/board/read";		// board>read.html 응답 
  * @author h
  *
