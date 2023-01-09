@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 쓰기</title>
+</head>
+<body>
+	<h1>게시글 쓰기</h1>
+	<!-- 
+		form : 입력 양식 태그
+			action : 요청 경로
+			method : 요청 메소드 (GET/POST) 
+	-->
+	<form action="/board/insert" method="post">
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- name : 요청 파라미터명 -->
+					<input type="text" name="title" >
+				</td>
+			<tr>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="writer">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="40" rows="10"></textarea>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<button type="submit">등록</button>
+			<button type="button" onclick="moveList()">목록</button>
+		</div>
+	
+	</form>
+	
+	<script>
+		function moveList() {
+			location.href = "/board/list"
+		}
+	</script>
+</body>
+</html>
