@@ -24,6 +24,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
+	// 교재 기준 spring boot 2.3.4 버전에서는 ojdbc8 의존성 지원 불가 --> 별도로 ojdbc8.jar 추가
+	// 수업 기준 spring boot 2.7.7 버전에서는 ojdbc8 의존성 지원
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
