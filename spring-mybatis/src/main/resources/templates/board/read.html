@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 읽기</title>
+</head>
+<body>
+	<h1>게시글 읽기</h1>
+	<form action="/board/delete" method="post">
+		<input type="hidden" name="boardNo" th:value="${board.boardNo}" readonly>
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- name : 요청 파라미터명 -->
+					<input type="text" name="title" th:value="${board.title}" readonly>
+				</td>
+			<tr>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="writer" th:value="${board.writer}" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="40" rows="10" th:text="${board.content}" readonly></textarea>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<button type="button" onclick="moveUpdate()">수정</button>
+			<button type="submit">삭제</button>
+			<button type="button" onclick="moveList()">목록</button>
+		</div>
+	
+	</form>
+	
+	<script>
+
+		let boardNo = "[[${board.boardNo}]]"
+		
+		function moveUpdate() {
+			location.href = "/board/update?boardNo=" + boardNo
+		}
+
+		function moveList() {
+			location.href = "/board/list"
+		}
+
+	</script>
+</body>
+</html>
