@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,8 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	// 인증 관리 설정 메소드
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		// AuthenticationManagerBuilder : 인증 관리 객체
 		auth.inMemoryAuthentication()			// 인증방식 : 인메모리 방식으로 지정
+			
+			// passwordEncoder.encode("비밀번호")  : 비밀번호를 암호화하는 메소드
 			// 사용자 등록 - 아이디 / 패스워드 / 권한
 			.withUser("user").password( passwordEncoder.encode("123456") ).roles("USER")
 			.and()
@@ -64,8 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 			.withUser("admin").password( passwordEncoder.encode("123456") ).roles("ADMIN")
 			;
 	}
-	
-	
 	
 	
 	
