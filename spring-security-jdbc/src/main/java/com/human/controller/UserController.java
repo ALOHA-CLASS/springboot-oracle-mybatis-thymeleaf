@@ -95,14 +95,13 @@ public class UserController {
 			HttpSession session = joinAndAuthenticaion(user, request);
 		}
 		
-		
 		// RedirectAttributes : 리다이렉트 될 경로에 전송할 데이터를 가지고 있는 인터페이스
 		// addFlashAttribute("파라미터명", 값)
 		// : 리다이렉트 하면서 임시로 저장할 데이터를 등록하는 메소드
 		rttr.addFlashAttribute("msg", user.getName() );
 		
 		// return "redirect:/auth/success"; // 가입완료 페이지
-		return "redirect:/user";
+		return "redirect:/";
 	}
 	
 	// 회원 가입 완료 - /auth/success
@@ -117,7 +116,9 @@ public class UserController {
 	private HttpSession joinAndAuthenticaion(Users user, HttpServletRequest request) throws Exception {
 		
 		String username = user.getUserId();
-		String password = user.getUserPw();
+		String password = user.getUserPwChk();			// userPw 는 암호화 되기 때문에, userPwChk 를 사용
+		log.info("username : " + username);
+		log.info("password : " + password);
 		
 		HttpSession session = request.getSession();
 		

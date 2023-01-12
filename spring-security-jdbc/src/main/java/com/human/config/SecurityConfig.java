@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,8 +21,8 @@ import com.human.security.CustomLoginSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Configuration
 @EnableWebSecurity			// 해당 클래스를 스프링 시큐리티 설정 클래스로 지정  
-@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	
 	// 비밀번호 암호화 객체

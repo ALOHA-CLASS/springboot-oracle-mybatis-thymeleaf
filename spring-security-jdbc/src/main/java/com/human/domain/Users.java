@@ -15,6 +15,7 @@ public class Users {
 	private int userNo;					// 회원번호
 	private String userId;				// 아이디
 	private String userPw;				// 패스워드
+	private String userPwChk;			// 패스워드 확인
 	private String name;				// 이름
 	private String email;				// 이메일
 	private int enabled;				// 휴면여부

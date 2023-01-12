@@ -10,7 +10,8 @@
 	<form action="/auth/join" method="post">
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<input type="text" name="userId" placeholder="아이디" /> <br>
-		<input type="text" name="userPw" placeholder="패스워드" /> <br>
+		<input type="password" name="userPw" placeholder="패스워드" /> <br>
+		<input type="password" name="userPwChk" placeholder="패스워드" /> <br>
 		<input type="text" name="name" placeholder="이름" /> <br>
 		<input type="text" name="email" placeholder="이메일" /> <br>
 		
