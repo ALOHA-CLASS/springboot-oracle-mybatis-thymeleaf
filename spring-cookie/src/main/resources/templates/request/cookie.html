@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	
+
+	<form action="/response/cookie" method="post">
+		<input type="text" name="CookieName" placeholder="쿠키 이름" /> <br>
+		<input type="text" name="CookieValue" placeholder="쿠키 값" /> <br>
+		<input type="text" name="path" placeholder="URL" /> <br>
+		<button type="submit">쿠키 생성</button>
+		<button type="submit" name="delete">쿠키 삭제</button>
+		<button type="submit" name="deleteAll">전체 삭제</button>
+	</form>
+	
+	<br>
+	
+	<table border="1">
+		<tr>
+			<th width="100">쿠키</th>
+			<th width="100">값</th>
+			<th width="100">URL</th>
+		</tr>
+		<th:block th:each="cookie : ${cookies}">
+			<tr>
+				<td>
+					<span th:text="${cookie.name}"></span>
+				</td>
+				<td>
+					<span th:text="${cookie.value}"></span>
+				</td>
+				<td>
+					<span th:text="${cookie.path}"></span>
+				</td>
+			</tr>
+		</th:block>
+	</table>
+	
+</body>
+</html>

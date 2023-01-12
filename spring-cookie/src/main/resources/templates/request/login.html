@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>로그인</title>
+</head>
+<body>
+	<h1>로그인</h1>
+	<form action="/request/login" method="post">
+		<input type="text" name="username" placeholder="아이디" th:value="${userId}"> <br>
+		<input type="password" name="password" placeholder="패스워드"> <br>
+		
+		<!-- 체크O : 서버에 "on" 으로 전달 - 아이디를 쿠키 저장 -->
+		<!-- 체크x : 서버에 null 로 전달  - 쿠키 삭제 -->
+		<th:block th:if="${!rememberId}">
+			<input type="checkbox" name="remember-id" id="remember-id" >
+		</th:block>
+		
+		<th:block th:if="${rememberId}">
+			<input type="checkbox" name="remember-id" id="remember-id" checked >
+		</th:block>
+		<label for="remember-id">아이디 저장</label>	
+		<br>
+		
+		<button type="submit">로그인</button>
+	</form>
+</body>
+</html>
+
+
+
