@@ -55,7 +55,7 @@
 		</table>
 		<div>
 			<button type="button" onclick="moveUpdate()">수정</button>
-			<button type="submit">삭제</button>
+			<button type="button" onclick="boardDelete()">삭제</button>
 			<button type="button" onclick="moveList()">목록</button>
 		</div>
 	
@@ -71,6 +71,13 @@
 
 		function moveList() {
 			location.href = "/board/list"
+		}
+		
+		function boardDelete() {
+			let check = confirm("정말로 삭제하시겠습니까?")
+			if( check ) {
+				form.submit()
+			}
 		}
 
 	</script>
