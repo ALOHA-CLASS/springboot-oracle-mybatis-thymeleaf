@@ -10,11 +10,11 @@
 	<a href="/board/insert">글쓰기</a>
 	<table border="1">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>등록일자</th>
-			<th>수정일자</th>
+			<th width="50">번호</th>
+			<th width="300">제목</th>
+			<th width="100">작성자</th>
+			<th width="200">등록일자</th>
+			<th width="200">수정일자</th>
 		</tr>
 		<!--
 			타임리프 블록 태그
@@ -24,6 +24,13 @@
 			타임리프 태그 반복문 
 			th:each="요소 : ${배열, 컬렉션}" 
 		-->
+		<!-- 조회된 게시글이 없을 때 -->
+		<th:block th:if="${#lists.isEmpty(boardList)}">
+			<tr>
+				<td colspan="5" align="center">조회된 내역이 없습니다.</td>
+			</tr>	
+		</th:block>
+		
 		<th:block th:each="board : ${boardList}">
 			<tr>
 				<td width="50" align="center" th:text="${board.boardNo}"></td>

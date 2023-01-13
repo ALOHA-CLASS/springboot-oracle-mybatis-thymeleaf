@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>게시글 읽기</h1>
-	<form action="/board/delete" method="post">
+	<form action="/board/delete" method="post" id="form">
 		<input type="hidden" name="boardNo" th:value="${board.boardNo}" readonly>
 		<table>
 			<tr>
@@ -31,7 +31,7 @@
 		</table>
 		<div>
 			<button type="button" onclick="moveUpdate()">수정</button>
-			<button type="submit">삭제</button>
+			<button type="button" onclick="boardDelete()">삭제</button>
 			<button type="button" onclick="moveList()">목록</button>
 		</div>
 	
@@ -39,6 +39,7 @@
 	
 	<script>
 
+		let form = document.getElementById("form")
 		let boardNo = "[[${board.boardNo}]]"
 		
 		function moveUpdate() {
@@ -48,7 +49,19 @@
 		function moveList() {
 			location.href = "/board/list"
 		}
+		
+		function boardDelete() {
+			let check = confirm("정말로 삭제하시겠습니까?")
+			if( check ) {
+				form.submit()
+			}
+		}
 
 	</script>
 </body>
 </html>
+
+
+
+
+
