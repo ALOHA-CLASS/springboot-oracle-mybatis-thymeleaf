@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 목록</title>
+</head>
+<body>
+	<h1>게시글 목록</h1>
+	
+	<form action="/board/list" method="get">
+		<a href="/board/insert">글쓰기</a>
+		<input type="text" name="keyword" placeholder="검색어 입력" th:value="${param.keyword}" />
+		<button type="submit">검색</button>
+	</form>
+
+	<table border="1">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>등록일자</th>
+			<th>수정일자</th>
+		</tr>
+		<!--
+			타임리프 블록 태그
+			<th:block> : 필요한 데이터를 블록으로 묶는 태그
+				* 브라우저가 렌더링할 때, 사라진다
+
+			타임리프 태그 반복문 
+			th:each="요소 : ${배열, 컬렉션}" 
+		-->
+		<th:block th:each="board : ${boardList}">
+			<tr>
+				<td width="50" align="center" th:text="${board.boardNo}"></td>
+				<td width="300">
+					<a th:href="|/board/read?boardNo=${board.boardNo}|" th:text="${board.title}"></a>
+				</td>
+				<td width="100" align="center" th:text="${board.writer}"></td>
+
+				<!-- Date 타입의 데이터를 포맷하는 방법 -->
+				<!-- ${} : th:속성 안에서 모델에 등록된 변수의 값을 가져오는 기호 -->
+				<!-- #유틸리티객체.메소드()	: 타임리프의 유틸리티 객체의 기능 사용 -->
+				<!-- #dates.forat(Date타입 데이터, '포맷') : Date타입 데이터를 지정한 포맷으로 출력-->
+				<td	width="200" align="center">
+					<span th:text="${#dates.format(board.regDate, 'yyyy-MM-dd HH:mm:ss') }"></span>
+				</td>
+				<td	width="200" align="center">
+					<span th:text="${#dates.format(board.updDate, 'yyyy-MM-dd HH:mm:ss') }"></span>
+				</td>
+			</tr>
+		</th:block>
+	</table>
+	
+	<!-- 페이지 -->
+	<div>
+		
+		<!-- 첫 페이지 -->
+		<a th:href="|/board/list?pageNo=${page.firstPage}|">[처음]</a>
+		
+		<!-- 이전 페이지 -->
+		<th:block th:if="${page.prev > 0 }">
+			<a th:href="|/board/list?pageNo=${page.prev}|">[이전]</a>
+		</th:block>
+	
+		<th:block th:each="no : ${#numbers.sequence( page.startPage, page.endPage )}">
+		
+			<b th:if="${no == page.pageNo}" style="font-size: 20px;">
+				<a th:href="|/board/list?pageNo=${no}|" th:text="${no}"></a>
+			</b>
+			
+			<th:block th:if="${no != page.pageNo}">
+				<a th:href="|/board/list?pageNo=${no}|" th:text="${no}"></a>
+			</th:block>
+			
+		</th:block>
+
+		<!-- 다음 페이지 -->
+		<th:block th:if="${ page.next <= page.lastPage }">
+			<a th:href="|/board/list?pageNo=${page.next}|">[다음]</a>
+		</th:block>
+
+		<!-- 마지막 -->		
+		<a th:href="|/board/list?pageNo=${page.lastPage}|">[마지막]</a>
+		
+		
+	</div>
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

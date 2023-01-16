@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인 페이지</title>
+</head>
+<body>
+	<h1>로그인</h1>
+	<form action="/auth/login" method="post">
+		<!-- 
+			CSRF Token 이란? 
+			- 클라이언트에서 보낸 요청이 실제 서버에서 허용한 요청인지 확인하는 토큰
+			- 서버에서 뷰페이지를 응답할 때, 토큰을 세션에 미리 저장해 둔다.
+			- 서버에서 허용한 요청인지 확인할 수 있는 임의로 생성된 문자열
+			* 로그인 요청 시, 해당 토큰과 함께 요청하면 서버가 허용된 요청인 것을 확인할 수 있다.
+			  (403 Forbidden 응답에러가 발생하지 않는다.)
+			403 상태코드 : 클라이언트가 요청한 자원에대한 권한이 없는 상태, 서비스 거부
+		-->
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<input type="text" name="username" placeholder="아이디" th:value="${userId}"> <br>
+		<input type="password" name="password" placeholder="패스워드"> <br>
+
+		<!-- 아이디 저장 -->		
+		<th:block th:if="${!rememberId}">
+			<input type="checkbox" name="remember-id" id="remember-id" >
+		</th:block>
+		
+		<th:block th:if="${rememberId}">
+			<input type="checkbox" name="remember-id" id="remember-id" checked >
+		</th:block>
+		<label for="remember-id">아이디 저장</label>	
+		<br>
+		
+		<!-- 자동 로그인 -->
+		<input type="checkbox" name="remember-me" id="remember-me">
+		<label for="remember-me">자동 로그인</label>	
+		<br>
+		
+		<button type="submit">로그인</button>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

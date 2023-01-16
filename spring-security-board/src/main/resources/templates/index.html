@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- 타임리프 문법으로 th:속성을 사용하기 위한 속성 -->
+<html xmlns:th="http://www.thymeleaf.org/"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  >
+<head>
+<meta charset="UTF-8">
+<title>로그인 & 회원가입</title>
+</head>
+<body>
+	<h1>스프링 시큐리티</h1>
+	<h3>인증 & 인가</h3>
+	
+	<form action="/auth/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		
+		<!-- 비인증 시, 로그인 버튼 -->
+		<!-- isAnonymous() : 인증되지 않은 사용자 이면 true, 아니면 false -->
+		<th:block sec:authorize="isAnonymous()">
+			<button type="button" onclick="location.href='/auth/login'">로그인</button>
+			<button type="button" onclick="location.href='/auth/join'">회원가입</button>
+		</th:block>
+		
+		<!-- 인증 시, 로그아웃 버튼 -->
+		<!-- isAuthenticated() : 인증된 사용자 이면 true, 아니면 false -->
+		<th:block sec:authorize="isAuthenticated()">
+			<!-- principal : 인증된 사용자 정보 객체 -->
+			<span sec:authentication="principal.username"></span>
+			<button type="submit">로그아웃</button>
+		</th:block>
+	</form>
+	
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
