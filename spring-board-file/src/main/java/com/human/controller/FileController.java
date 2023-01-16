@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.human.domain.Files;
@@ -103,10 +105,29 @@ public class FileController {
 		String ext = filePath.substring( filePath.lastIndexOf(".") + 1 );	// 확장자
 		MediaType mType = MediaUtil.getMediaType(ext);
 		
+		// 이미지 타입이 아닐 경우
+		if( mType == null ) {
+			return;
+		}
+		
+		
 		log.info("mType : " + mType);
-		
 		response.setContentType( mType.toString() );
+	}
+	
+	
+	// 파일 삭제
+	@PostMapping("/delete")
+	public ResponseEntity<String> fileDelete(@RequestBody Files file) throws Exception {
+		int fileNo = file.getFileNo();
+		log.info("파일 삭제...");
+		log.info("fileNo : " + fileNo);
 		
+		// 파일 삭제 요청
+		int result = fileService.delete(fileNo);
+		
+		
+		return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 	}
 	
 

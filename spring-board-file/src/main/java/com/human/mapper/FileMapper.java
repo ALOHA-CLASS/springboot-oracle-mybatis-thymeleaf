@@ -19,4 +19,16 @@ public interface FileMapper {
 	// 파일 조회
 	public Files read(int fileNo) throws Exception;
 	
+	// 파일 삭제
+	public int delete(int fileNo) throws Exception;
+	
 }
+
+
+
+
+
+
+
+
+

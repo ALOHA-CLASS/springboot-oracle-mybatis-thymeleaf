@@ -18,6 +18,16 @@
 		ORDER BY reg_date DESC
 	</select>
 	
+	<!-- 게시글 검색 -->
+	<select id="search" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE title LIKE '%' || #{keyword} || '%'
+		   OR writer LIKE '%' || #{keyword} || '%'
+		   OR content LIKE '%' || #{keyword} || '%'
+		ORDER BY reg_date DESC
+	</select>
+	
 	<!-- 게시글 조회 -->
 	<!-- 파라미터 표기 : #{파라미터명} -->
 	<!-- 			 #{} 파라미터 개수가 1개라면, 이름과 무관하게 매핑된다 -->

@@ -7,7 +7,12 @@
 <body>
 	<h1>게시글 목록</h1>
 	
-	<a href="/board/insert">글쓰기</a>
+	<form action="/board/list" method="get">
+		<a href="/board/insert">글쓰기</a>
+		<input type="text" name="keyword" placeholder="검색어 입력" th:value="${param.keyword}" />
+		<button type="submit">검색</button>
+	</form>
+
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -45,5 +50,10 @@
 			</tr>
 		</th:block>
 	</table>
+
+	
+
+
+
 </body>
 </html>

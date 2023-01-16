@@ -25,6 +25,12 @@
 		WHERE file_no = #{fileNo}
 	</select>
 	
+	<!-- 파일 삭제 -->
+	<delete id="delete">
+		DELETE FROM files
+		WHERE file_no = #{fileNo}
+	</delete>
+	
 	
 
 
