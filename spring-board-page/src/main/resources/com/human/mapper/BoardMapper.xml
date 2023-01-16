@@ -1,0 +1,110 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace : 매퍼 인터페이스의 경로 작성 -->
+<!-- 			 XML 매퍼 파일과 매퍼 인터페이스와 연결 -->
+<mapper namespace="com.human.mapper.BoardMapper">
+
+	<!-- id : 연결될 메소드 명을 작성 -->
+	<!-- resultType : 조회 결과를 매핑할 클래스 타입 (패키지경로+클래스명) -->
+	<!-- 			  mybatis-cofig.xml 설정파일에서 설정한 별칭이 있으면 별칭으로 작성가능 -->
+	
+	<!-- 게시글 목록 -->
+	<select id="list" resultType="Board">
+		SELECT *
+		FROM board
+		ORDER BY reg_date DESC
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<select id="search" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE title LIKE '%' || #{keyword} || '%'
+		   OR writer LIKE '%' || #{keyword} || '%'
+		   OR content LIKE '%' || #{keyword} || '%'
+		ORDER BY reg_date DESC
+	</select>
+	
+	<!-- 게시글 조회 -->
+	<!-- 파라미터 표기 : #{파라미터명} -->
+	<!-- 			 #{} 파라미터 개수가 1개라면, 이름과 무관하게 매핑된다 -->
+	<select id="read" resultType="Board">
+		SELECT *
+		FROM board
+		WHERE board_no = #{boardNo}
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<!-- Mapper 인터페이스에서 넘겨줄 파라미터가 여러 개라면 객체로 매핑할 수도 있다. -->
+	<!-- #{index} : 파라미터들을 순서대로 index 로 매핑하여 사용할 수도 있다 -->
+	<!-- 매개변수로 Board 클래스를 지정하면 변수들이 자동으로 #{변수} 파라미터에 매핑된다 -->
+	<insert id="insert">
+		INSERT INTO board ( board_no, title, writer, content )
+		VALUES ( SEQ_BOARD.nextval, #{title}, #{writer}, #{content} )
+		<!--  VALUES ( SEQ_BOARD.nextval, #{0}, #{1}, #{2} )  -->
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<!-- Map 컬렉션의 key를 파라미터명에 매핑하여 전달할 수도 있다 -->
+	<update id="update">
+		UPDATE board
+		   set title = #{title}
+		      ,writer = #{writer}
+		      ,content = #{content}
+		      ,upd_date = sysdate
+		WHERE board_no = #{boardNo}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+		DELETE FROM board
+		WHERE board_no = #{boardNo}
+	</delete>
+	
+	<!-- 게시글 개수 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM board
+	</select>
+	
+	<!-- [페이지] 게시글 목록 -->
+	<select id="listWithPage" resultType="Board">
+		<!-- CDATA :  <> 기호를 태그로 인식하지 않고, 문자열로 사용되도록 한다 -->
+		<![CDATA[
+			SELECT *
+			FROM (
+			    SELECT a.*, ROWNUM rno
+			    FROM board a
+			    ORDER BY board_no DESC
+			) b
+			WHERE b.rno >= #{startRowNo}
+			  AND b.rno <= #{endRowNo}
+			  
+		 ]]>
+	</select>
+	
+	
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

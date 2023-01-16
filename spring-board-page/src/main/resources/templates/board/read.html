@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 읽기</title>
+</head>
+<body>
+	<h1>게시글 읽기</h1>
+	<form action="/board/delete" method="post" id="form">
+		<input type="hidden" name="boardNo" th:value="${board.boardNo}" readonly>
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- name : 요청 파라미터명 -->
+					<input type="text" name="title" th:value="${board.title}" readonly>
+				</td>
+			<tr>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="writer" th:value="${board.writer}" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="40" rows="10" th:text="${board.content}" readonly></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>썸네일</td>
+				<td>
+					<ul>
+						<th:block th:each="file : ${fileList}">
+							<li>
+								<img th:src="|/file/img?filePath=${file.filePath}|" width="200" th:alt="${file.fileName}" />
+							</li>
+						</th:block>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>파일</td>
+				<td>
+					<ul>
+						<th:block th:each="file : ${fileList}">
+							<li>
+								<a th:text="${file.fileName}" href="#" th:href="|/file/${file.fileNo}|" ></a>
+								<!-- 파일 삭제 버튼 -->
+								<button type="button" th:id="|file-${file.fileNo}|" class="btn-file-delete" th:data="${file.fileNo}">삭제</button>
+							</li>
+						</th:block>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<button type="button" onclick="moveUpdate()">수정</button>
+			<button type="button" onclick="boardDelete()">삭제</button>
+			<button type="button" onclick="moveList()">목록</button>
+		</div>
+	
+	</form>
+	
+	<script>
+
+		let form = document.getElementById("form")
+		let boardNo = "[[${board.boardNo}]]"
+		let btnFileDelete = document.querySelectorAll(".btn-file-delete")
+		
+		for(let i = 0 ; i < btnFileDelete.length ; i++) {
+			// 파일 삭제 버튼 클릭 이벤트
+			btnFileDelete[i].addEventListener('click', function() {
+				let btn = this
+				let fileNo = this.getAttribute('data') // 파일 번호
+	
+				let data = {
+								"fileNo"	: fileNo
+							}
+				
+				let request = new XMLHttpRequest()
+				
+				request.open("POST", "/file/delete", true)
+				request.setRequestHeader("Content-Type", "application/json")
+				request.send( JSON.stringify( data ) )
+				
+				request.onreadystatechange = function() {
+					
+					// 요청 성공 시,
+					if( request.readyState == request.DONE && request.status == 200 ) {
+						console.log( '파일 삭제 성공')
+						console.log( btn.parentNode )
+						// 파일 항목을 화면에서 제거
+						btn.parentNode.remove()
+					}
+					
+				}
+			})
+			
+		}
+
+		
+		
+		
+		
+		function moveUpdate() {
+			location.href = "/board/update?boardNo=" + boardNo
+		}
+
+		function moveList() {
+			location.href = "/board/list"
+		}
+		
+		function boardDelete() {
+			let check = confirm("정말로 삭제하시겠습니까?")
+			if( check ) {
+				form.submit()
+			}
+		}
+
+	</script>
+</body>
+</html>

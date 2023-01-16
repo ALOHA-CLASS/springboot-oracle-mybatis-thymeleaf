@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 수정</title>
+</head>
+<body>
+	<h1>게시글 수정</h1>
+	<form action="/board/update" method="post" id="form">
+		<input type="hidden" name="boardNo" th:value="${boardNo}" readonly>
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- name : 요청 파라미터명 -->
+					<input type="text" name="title" th:value="${board.title}">
+				</td>
+			<tr>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="writer" th:value="${board.writer}">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="40" rows="10" th:text="${board.content}"></textarea>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<button type="submit">수정</button>
+			<button type="button" onclick="boardDelete()">삭제</button>
+			<button type="button" onclick="moveList()">목록</button>
+		</div>
+	
+	</form>
+
+	<script>
+
+		let form = document.getElementById("form")
+
+		function boardDelete() {
+			let check = confirm("정말로 삭제하시겠습니까?")
+			if( check ) {
+				form.action = "/board/delete"	// form 태그이 aciton 속성을 변경 : /board/delete
+				form.submit()					// form 전송
+			}
+		}
+
+		function moveList() {
+			location.href = "/board/list"
+		}
+	</script>
+</body>
+</html>

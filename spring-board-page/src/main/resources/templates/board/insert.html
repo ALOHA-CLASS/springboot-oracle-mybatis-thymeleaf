@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 쓰기</title>
+</head>
+<body>
+	<h1>게시글 쓰기</h1>
+	<!-- 
+		form : 입력 양식 태그
+			action : 요청 경로
+			method : 요청 메소드 (GET/POST) 
+	-->
+	<!-- 
+		enctype : 폼 전송 시, 인코딩 옵션을 지정하는 속성 (정해진 3가지 옵션중 하나를 지정)
+		- application/x-www-form-urlencoded		: 기본값, 전송 데이터를 인코딩하도록 지정
+		- multipart/form-data					: 전송 데이터를 인코딩하지 않도록 지정
+		- text/plain							: 공백→ '+" 변환, 나머지는 인코딩 안함
+		
+		*  enctype="multipart/form-data" 지정한 이유  
+		- 파일 데이터를 정상적으로 전송하기 위하여 인코딩하지 않고 전송해야한다  
+	-->
+	<form action="/board/insert" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- name : 요청 파라미터명 -->
+					<input type="text" name="title" >
+				</td>
+			<tr>
+			<tr>
+				<td>작성자</td>
+				<td>
+					<input type="text" name="writer">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<textarea name="content" cols="40" rows="10"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>파일</td>
+				<td>
+					<input type="file" name="files" multiple>
+				</td>
+			</tr>			
+		</table>
+		<div>
+			<button type="submit">등록</button>
+			<button type="button" onclick="moveList()">목록</button>
+		</div>
+	
+	</form>
+	
+	<script>
+		function moveList() {
+			location.href = "/board/list"
+		}
+	</script>
+</body>
+</html>
