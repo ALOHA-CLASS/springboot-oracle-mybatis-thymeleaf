@@ -24,6 +24,25 @@
 	          <a class="nav-link" href="/board/list">board</a>
 	        </li>
 	      </ul>
+	      
+	      <!-- 비인증 시, 로그인 버튼 -->
+		  <!-- isAnonymous() : 인증되지 않은 사용자 이면 true, 아니면 false -->
+		  <th:block sec:authorize="isAnonymous()">
+			<button type="button" onclick="location.href='/auth/login'" class="btn btn-primary mx-1">로그인</button>
+			<button type="button" onclick="location.href='/auth/join'" class="btn btn-primary mx-1">회원가입</button>
+		  </th:block>
+	      
+	      <form action="/auth/logout" method="post" class="mx-3">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<!-- 인증 시, 로그아웃 버튼 -->
+				<!-- isAuthenticated() : 인증된 사용자 이면 true, 아니면 false -->
+				<th:block sec:authorize="isAuthenticated()">
+					<!-- principal : 인증된 사용자 정보 객체 -->
+					<span sec:authentication="principal.username" class="text-white"></span>
+					<button type="submit" class="btn btn-primary">로그아웃</button>
+				</th:block>
+		  </form>
+	      
 	      <form class="d-flex" role="search">
 	        <input class="form-control me-2" type="search" placeholder="검색어 입력" aria-label="Search">
 	        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
@@ -34,7 +53,7 @@
 	
 	<main class="container mt-5">
 	  <div class="bg-light p-5 rounded">
-	    <h1>게시판 프로젝트</h1>
+	    <h1>회원 게시판 프로젝트</h1>
 	    <p class="lead">
 	    	<ul>
 			  <li>spring boot 2.7.7</li>
@@ -47,6 +66,8 @@
 					  <li>게시글 등록</li>
 					  <li>게시글 수정</li>
 					  <li>게시글 삭제</li>
+					  <li>파일 업로드</li>
+					  <li>페이징 처리</li>
 			  	   </ul>
 			  </li>
 			</ul>
@@ -58,28 +79,6 @@
 	    	게시글 목록
 	    </a>
 	    
-	    <div class="py-5">
-		    <form action="/auth/logout" method="post" >
-				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-				
-				<!-- 비인증 시, 로그인 버튼 -->
-				<!-- isAnonymous() : 인증되지 않은 사용자 이면 true, 아니면 false -->
-				<th:block sec:authorize="isAnonymous()">
-					<button type="button" onclick="location.href='/auth/login'" class="btn btn-primary">로그인</button>
-					<button type="button" onclick="location.href='/auth/join'" class="btn btn-primary">회원가입</button>
-				</th:block>
-				
-				<!-- 인증 시, 로그아웃 버튼 -->
-				<!-- isAuthenticated() : 인증된 사용자 이면 true, 아니면 false -->
-				<th:block sec:authorize="isAuthenticated()">
-					<!-- principal : 인증된 사용자 정보 객체 -->
-					<span sec:authentication="principal.username"></span>
-					<button type="submit">로그아웃</button>
-				</th:block>
-			</form>
-	    
-	    </div>
-		
 	  </div>
 	</main>
 
