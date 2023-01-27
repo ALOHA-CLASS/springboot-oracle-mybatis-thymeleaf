@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사용자 페이지</title>
+</head>
+<body>
+	<h1>사용자 페이지</h1>
+	<h3>ROLE_USER</h3>
+	
+	<form action="/auth/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<button type="submit">로그아웃</button>
+	</form>
+	
+	
+</body>
+</html>

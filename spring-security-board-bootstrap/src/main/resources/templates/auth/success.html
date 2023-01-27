@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>회원 가입 완료 페이지</title>
+</head>
+<body>
+	<h1>회원 가입 완료</h1>
+	<h3 th:text="|${msg} 님, 축하드립니다.|"></h3>
+	<button type="button" onclick="location.href='/auth/login'">로그인</button>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.mapper.UserMapper">
+
+	<!-- 회원 등록 -->
+	<insert id="join">
+		INSERT INTO users ( user_no, user_id, user_pw, name, email )
+		VALUES ( SEQ_USER.nextval, #{userId}, #{userPw}, #{name}, #{email} )
+	</insert>
+	
+	<!-- 권한 등록 -->
+	<insert id="insertAuth">
+		INSERT INTO user_auth ( auth_no, user_id, auth )
+		VALUES ( SEQ_USER_AUTH.nextval, #{userId}, #{auth} )
+	</insert>
+	
+	
+	
+	
+
+</mapper>
+
+
+
+
+
