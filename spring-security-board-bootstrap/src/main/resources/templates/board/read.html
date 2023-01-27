@@ -53,6 +53,7 @@
 	<main class="container mt-5 py-5">
 		<h1 class="text-center py-5">게시글 읽기</h1>
 		<form action="/board/delete" method="post" id="form">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />			
 			<input type="hidden" name="boardNo" th:value="${board.boardNo}" readonly>
 			<table class="table">
 				<tr>
@@ -111,7 +112,7 @@
 				</th:block>
 				<button type="button" class="btn btn-success mx-2" onclick="moveList()">목록</button>
 			</div>
-		
+			
 		</form>
 		
 	</main>
@@ -153,8 +154,6 @@
 			
 		}
 
-		
-		
 		
 		
 		function moveUpdate() {

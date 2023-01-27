@@ -332,6 +332,8 @@ public class BoardController {
 	@PostMapping("/board/delete")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public String deletePost(int boardNo, Principal principal) throws Exception {
+		log.info("게시글 삭제...");
+		
 		// 게시글 번호로 게시글 삭제
 		System.out.println("boardNo : " + boardNo);
 		Board board = service.read(boardNo);
