@@ -1,7 +1,12 @@
 
 
 
-# springboot
+# SPRING BOOT
+
+- SPRING BOOT 2.7.7
+- Thymeleaf
+- ORACLE
+- Mybatis 3.0
 
 ## Project
 
