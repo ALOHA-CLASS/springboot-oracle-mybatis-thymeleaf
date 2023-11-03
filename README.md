@@ -44,4 +44,4 @@
 
 ### 1:1 레슨 [숨고 프로그래밍 레슨](https://soomgo.com/profile/users/717340)
 
-### 현장강의 [휴먼교육센터](http://www.human.or.kr/) 02-3667-3688
+### 현장강의 [더조은아카데미](http://bu.tjoeun.co.kr/) 032.521.8889
